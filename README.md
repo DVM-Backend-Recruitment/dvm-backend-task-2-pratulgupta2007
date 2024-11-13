@@ -67,7 +67,37 @@ docker-compose down
 > Ensure to NOT add the '-v' flag as it will remove the postgres database volume as well causing the same migration error as in development
 
 
-3. 
+3. Start the production containers:
+
+```
+docker-compose -f docker-compose.prod.yml up -d --build
+docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+```
+
+Incase of performing migrations, perform similar steps like in development section (setting debug to 0 and 1)
+
+4. Test the server at http://localhost:1337
+
+However, for some reason, allauth does not work properly with nginx and always redirects to http://localhost/... instead of http://localhost:1337/..
 
 ## Walkthrough
 https://youtu.be/YzNGsqDOGKg
+
+## Docker commands
+Some docker commands I used:
+```
+docker-compose build --> For building containers
+docker-compose up -d --> Runs containers while detached
+docker-compose up -d --build --> Effectively combines the above 2 commands
+docker-compose pull --> Pull images
+docker-compose exec <service> <some command> --noinput --> To run a certain command in the service-specific container
+docker-compose -f <custom compose file> .... --> Used for compose files with different name or address than ./docker-compose.yml
+
+docker exec -ti <postgres_container_name> psql -U <username> --> To open psql cmd line in terminal. Useful for checking if migrations have been applied
+docker exec -it <django_container> /bin/bash --> Run commands (python manage.py .. ones)
+
+docker volume inspect <volume name> --> To inspect volume info
+
+docker system prune --> To reclaim system memory
+```
+Instead of docker exec.., I found opening Docker Desktop, going to the container and going to 'exec' and executing my commands there more convenient.
