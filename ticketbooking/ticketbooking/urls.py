@@ -26,7 +26,7 @@ import os
 urlpatterns = [
     path("admin/", admin.site.urls),]
 
-if bool(settings.DEBUG):
+if not bool(settings.DEBUG):
     from main.panel_views import (
         panel,
         adminlogin,
