@@ -44,7 +44,8 @@ Set debug setting to 0 and restart the container:
 docker-compose up -d
 ```
 
-Note: There is some issue with urls.py that causes a OperationalError in django where it is unable to find the models.
+> [!NOTE]
+> There is some issue with urls.py that causes a OperationalError in django where it is unable to find the models.
 The solution is to migrate the database without creating the model-related urls in urls.py hence the setting debug to 0/1.
 
 5. Test the app at http://localhost:8000
@@ -62,7 +63,9 @@ POSTGRES_DB=bookmyticket
 ```
 docker-compose down
 ```
-Ensure to NOT add the '-v' flag as it will remove the postgres database volume as well causing the same migration error as in development
+> [!CAUTION]
+> Ensure to NOT add the '-v' flag as it will remove the postgres database volume as well causing the same migration error as in development
+
 
 3. 
 
