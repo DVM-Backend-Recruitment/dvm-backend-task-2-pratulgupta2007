@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  <p></p>
+  <h1><center>{{ adminuser.theater_name }}</center></h1>
+
+  
+
+  <div style="margin-left:50px;margin-top:20px;margin-right:50px;margin-bottom:20px;">
+
+
+
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"><h4>Movie Name</h4></th>
+          <th scope="col"><h4>Date</h4></th>
+          <th scope="col"><h4>Time</h4></th>
+          <th scope="col"><h4>Viewing Experience</h4></th>
+          <th scope="col"><h4>Language</h4></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for show, showurl in shows %}
+        <tr>
+          <th scope="row"><a href="{{showurl}}">{{show.get_moviename}}</a></th>
+          <td>{{show.get_date}}</td>
+          <td>{{show.get_time}}</td>
+          <td>{{show.type}}</td>
+          <td>{{show.language}}</td>
+          <td><a type="button" class="btn btn-primary" href="{{show.get_absolute_url}}" role="button">Book</a></td>
+        </tr>
+          
+        {% endfor %}
+        
+      </tbody>
+    </table>
+    
+    
+  </div>
+
+  {% endblock %}
