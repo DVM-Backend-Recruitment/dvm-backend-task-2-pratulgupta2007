@@ -26,11 +26,15 @@ SQL_HOST=db
 SQL_PORT=5432
 EMAIL_ID=
 APP_PWD=
+MIGRATE=
 ```
 Get CLIEND_ID and CLIENT_SECRET from google oauth api
 EMAIL_ID and APP_PWD from google security settings
 
-4. Set debug settings in .env to 1 and then run the following in root directory:
+Configure the oauth settings as the following:
+![alt text](images/oauth_config.jpg)
+
+4. Set MIGRATE in .env to 0 and then run the following in root directory:
 
 ```
 docker-compose up -d build
@@ -38,7 +42,7 @@ docker-compose exec python manage.py migrate --noinput
 docker-compose down
 ```
 
-Set debug setting to 0 and restart the container:
+Set MIGRATE to 1 and restart the container:
 
 ```
 docker-compose up -d
@@ -46,9 +50,14 @@ docker-compose up -d
 
 > [!NOTE]
 > There is some issue with urls.py that causes a OperationalError in django where it is unable to find the models.
-The solution is to migrate the database without creating the model-related urls in urls.py hence the setting debug to 0/1.
+The solution is to migrate the database without creating the model-related urls in urls.py hence the setting MIGRATE to 0/1.
 
 5. Test the app at http://localhost:8000
+
+6. Create superadmin:
+```
+docker exec bookmyticket-web-1 python manage.py createsuperuser --noinput
+```
 
 ### Production
 1. Create .env.prod and .env.prod.dev
@@ -74,11 +83,9 @@ docker-compose -f docker-compose.prod.yml up -d --build
 docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
 ```
 
-Incase of performing migrations, perform similar steps like in development section (setting debug to 0 and 1)
+4. Perform migrations (if any) by repeating
 
-4. Test the server at http://localhost:1337
-
-However, for some reason, allauth does not work properly with nginx and always redirects to http://localhost/... instead of http://localhost:1337/..
+5. Test the server at http://localhost
 
 ## Walkthrough
 https://youtu.be/YzNGsqDOGKg

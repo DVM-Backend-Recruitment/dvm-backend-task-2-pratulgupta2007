@@ -26,7 +26,7 @@ import os
 urlpatterns = [
     path("admin/", admin.site.urls),]
 
-if not bool(settings.DEBUG):
+if int(os.environ.get('MIGRATE')):
     from main.panel_views import (
         panel,
         adminlogin,

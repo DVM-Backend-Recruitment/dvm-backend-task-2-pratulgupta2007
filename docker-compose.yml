@@ -1,3 +1,4 @@
+name: bookmyticket
 services:
   web:
     build: ./ticketbooking
