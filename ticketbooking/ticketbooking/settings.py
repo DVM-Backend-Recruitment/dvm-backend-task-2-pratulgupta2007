@@ -25,11 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
-<<<<<<< HEAD
 DEBUG = int(os.environ.get("DEBUG"))
-=======
-DEBUG = os.environ.get("DEBUG")
->>>>>>> 7a52918e84a9177f7239ad2110ac97edf11cbaf0
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '139.59.24.97', 'bookmyticket.live']
 
 # Application definition
@@ -195,8 +191,5 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-<<<<<<< HEAD
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-=======
->>>>>>> 7a52918e84a9177f7239ad2110ac97edf11cbaf0
