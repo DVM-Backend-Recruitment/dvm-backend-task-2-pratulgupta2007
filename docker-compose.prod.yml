@@ -1,4 +1,3 @@
-name: bookmyticket
 services:
   web:
     build:
@@ -30,7 +29,7 @@ services:
     env_file:
       - .env.prod.db
   nginx:
-    build: ./nginx
+    build: ./proxy
     ports:
       - 80:80
     volumes:

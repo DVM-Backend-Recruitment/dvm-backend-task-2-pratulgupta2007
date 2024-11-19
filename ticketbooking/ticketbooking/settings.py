@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = os.environ.get("DEBUG")
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+DEBUG = int(os.environ.get("DEBUG"))
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '139.59.24.97', 'bookmyticket.live']
 
 # Application definition
 
@@ -182,6 +182,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 if DEBUG:
     CSRF_TRUSTED_ORIGINS = ["http://localhost:1337"]
+else:
+    CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS").split(" ")
 
 STORAGES = {
     # ...
@@ -189,3 +191,5 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
