@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name ${DOMAIN} www.${DOMAIN};
+    server_name bookmyticket.live www.bookmyticket.live;
 
     location /.well-known/acme-challenge/ {
         root /vol/www/;

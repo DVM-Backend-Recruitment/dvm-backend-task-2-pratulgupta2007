@@ -1,6 +1,10 @@
+upstream ticketbooking {
+    server web:8000;
+}
+
 server {
     listen 80;
-    server_name ${DOMAIN} www.${DOMAIN};
+    server_name bookmyticket.live www.bookmyticket.live;
 
     location /.well-known/acme-challenge/ {
         root /vol/www/;
@@ -13,10 +17,10 @@ server {
 
 server {
     listen      443 ssl;
-    server_name ${DOMAIN} www.${DOMAIN};
+    server_name bookmyticket.live www.bookmyticket.live;
 
-    ssl_certificate     /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/bookmyticket.live/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bookmyticket.live/privkey.pem;
 
     include     /etc/nginx/options-ssl-nginx.conf;
 
@@ -29,7 +33,7 @@ server {
     }
 
     location / {
-        uwsgi_pass           ${APP_HOST}:${APP_PORT};
+        uwsgi_pass           web:8000;
         include              /etc/nginx/uwsgi_params;
         client_max_body_size 10M;
     }
